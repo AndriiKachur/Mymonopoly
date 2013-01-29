@@ -21,3 +21,4 @@ properties. E.g. 'Win+R' -> type 'cmd' -> Enter -> type 'echo %USERNAME%' -> Ent
 
 
 To test a game you need to login and create a game with two players in a game room (two browsers).
+Test game field can be found at '/game/mock' page.
