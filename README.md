@@ -10,7 +10,7 @@ How to setup:
 1) Create database and apply dump 'infrastructure/database.sql' to it
 
 2) Copy 'infrastructure/default.properties' to file 'infrastructure/%USERNAME%.properties' and change necessary
-properties. E.g. 'Win+R' -> type 'cmd' -> Enter -> type 'echo %USERNAME%' -> Enter.
+properties. System username you can get by next actions: 'Win+R' -> type 'cmd' -> Enter -> type 'echo %USERNAME%' -> Enter.
 
 3) Use maven to run full cycle of project assembly 'mvn clean install'.
 
