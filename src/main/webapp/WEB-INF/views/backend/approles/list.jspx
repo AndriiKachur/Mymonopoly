@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_net_mymonopoly_entity_AppRole" items="${approles}" z="xIMywrSFtzLd6v/ZCgzTZWainQs=">
+        <table:table data="${approles}" id="l_net_mymonopoly_entity_AppRole" path="/backend/approles" z="user-managed">
+            <table:column id="c_net_mymonopoly_entity_AppRole_name" property="name" z="Z1fouX5gE2KahMogNHRlAXhLitk="/>
+            <table:column id="c_net_mymonopoly_entity_AppRole_description" property="description" z="NqXvPD6vsFi0Rue8s9aFOrAVJJA="/>
+        </table:table>
+    </page:list>
+</div>

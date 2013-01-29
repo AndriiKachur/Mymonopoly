@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_net_mymonopoly_entity_GameRailroad" items="${gamerailroads}" z="xlmzdCQ2oijH21RN1wHVKeViu0Y=">
+        <table:table data="${gamerailroads}" id="l_net_mymonopoly_entity_GameRailroad" path="/backend/gamerailroads" z="user-managed">
+            <table:column id="c_net_mymonopoly_entity_GameRailroad_cost" property="cost" z="yr8vu2t4aiMiRW0qFoFEItkzdEI="/>
+            <table:column id="c_net_mymonopoly_entity_GameRailroad_rent1" property="rent1" z="yrmOJLt7Pta0YzQzwFlzZxr0hKs="/>
+            <table:column id="c_net_mymonopoly_entity_GameRailroad_rent2" property="rent2" z="CDwU8aSq7eRpmPIyEEIlU1y9poc="/>
+            <table:column id="c_net_mymonopoly_entity_GameRailroad_rent3" property="rent3" z="Zxa2+8bBJSlP0FhUGg8otOCGIA0="/>
+            <table:column id="c_net_mymonopoly_entity_GameRailroad_owner" property="owner" z="Pd1HFnj92UDm/dB1gWcNwW92OHY="/>
+            <table:column id="c_net_mymonopoly_entity_GameRailroad_mortaged" property="mortaged" z="z7LkefyoYnBycw19FlgqhiO46rc="/>
+        </table:table>
+    </page:list>
+</div>

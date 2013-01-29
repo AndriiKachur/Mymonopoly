@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_net_mymonopoly_entity_AppUser" object="${appuser}" path="/backend/appusers" z="user-managed">
+        <field:display field="name" id="s_net_mymonopoly_entity_AppUser_name" object="${appuser}" z="kOWtVNLaTUA5aQovafCNPx/SvMM="/>
+        <field:display field="surname" id="s_net_mymonopoly_entity_AppUser_surname" object="${appuser}" z="s+TPa4ip7D1ejld9Rcf9jZLsZSc="/>
+        <field:display field="nickname" id="s_net_mymonopoly_entity_AppUser_nickname" object="${appuser}" z="dehNsUiaFo2RFv9nLGa0NLVv9cc="/>
+        <field:display field="email" id="s_net_mymonopoly_entity_AppUser_email" object="${appuser}" z="ChU12NHx82G3jx6WxAB5ZqWTndk="/>
+        <field:display field="password" id="s_net_mymonopoly_entity_AppUser_password" object="${appuser}" z="n20+Iv3XSwOCTN93uXF5SwE9ZeY="/>
+        <field:display date="true" dateTimePattern="${appUser_activationdate_date_format}" field="activationDate" id="s_net_mymonopoly_entity_AppUser_activationDate" object="${appuser}" z="HqGoboKT6lA+81h8gDbshV28s5c="/>
+        <field:display field="locked" id="s_net_mymonopoly_entity_AppUser_locked" object="${appuser}" z="xuSf4iMl0FivdVkRXq8HW0wV4vg="/>
+        <field:display field="enabled" id="s_net_mymonopoly_entity_AppUser_enabled" object="${appuser}" z="VEskidvxnS/yJR0sFUecTABp0ak="/>
+        <field:display field="activationCode" id="s_net_mymonopoly_entity_AppUser_activationCode" object="${appuser}" z="ZXup4Y7wHOYPZCbR6+OfmTOC+tI="/>
+    </page:show>
+</div>

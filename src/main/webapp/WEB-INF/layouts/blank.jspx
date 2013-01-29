@@ -1,0 +1,51 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+	<html>
+<jsp:output doctype-root-element="HTML"
+	doctype-system="about:legacy-compat" omit-xml-declaration="yes" />
+
+<jsp:directive.page contentType="text/html;charset=UTF-8" />
+<jsp:directive.page pageEncoding="UTF-8" />
+
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<c:url value="/styles/bootstrap.css" var="url"/>
+			<link href="${url}" rel="stylesheet"/>
+    		<style type="text/css">
+     			body {
+      		 		padding-top: 60px;
+					padding-bottom: 40px;
+      			}
+    		</style>
+    		<c:url value="/styles/bootstrap-responsive.css" var="url"/>
+    		<link href="${url}" rel="stylesheet"/>
+    		<c:url value="/styles/game.css" var="url"/>
+			<link href="${url}" rel="stylesheet"/>
+			<c:url value="/styles/chat.css" var="url" />
+			<link href="${url}" rel="stylesheet" />
+			
+			<c:url value="/js/jquery.js" var="url"/>
+    		<script type="text/javascript" src="${url}"><jsp:text/></script>
+    		<c:url value="/js/bootstrap.min.js" var="url"/>
+    		<script type="text/javascript" src="${url}"><jsp:text/></script>
+    		<c:url value="/js/jq_popover.js" var="url"/>
+    		<script type="text/javascript" src="${url}"><jsp:text/></script>
+    		<c:url value="/js/bootstrap_dropdown.js" var="url"/>
+    		<script type="text/javascript" src="${url}"><jsp:text/></script>
+    		<c:url value="/js/page/game.js" var="url"/>
+    		<script type="text/javascript" src="${url}"><jsp:text/></script>
+    		<c:url value="/js/chat.js" var="url"/>
+    		<script type="text/javascript" src="${url}"><jsp:text/></script>
+			
+			<spring:message code="application_name" var="app_name" htmlEscape="false" />
+			<title><spring:message code="welcome_h3" arguments="${app_name}" /></title>
+		</head>
+
+		<body>
+			<tiles:insertAttribute name="body" />
+		</body>
+	</html>
+</jsp:root>

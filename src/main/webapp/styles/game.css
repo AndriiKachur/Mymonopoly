@@ -1,0 +1,170 @@
+.mark {
+	margin: 0px 0px 0px 1px;
+	padding:1px;
+	border:1px solid green;
+	font-size: 13px;
+}
+
+.cell {
+	margin: 0;
+	height:50px;
+	width:85px;
+	/*border: 1px solid #00A4DB;*/
+	border-radius: 4px;
+}
+
+.estate {
+	border:3px solid;
+}
+
+.centerfield {
+	height: 300px;
+}
+
+div#gamePlace{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+#playerinfo1 {
+	position: absolute;
+	left: 3%;
+	top: 76px;
+	border: 1px solid #00A4DB;
+	border-radius: 4px;
+	margin-bottom: 5px;
+	padding: 4px 4px 4px 4px;
+	width: 79px;
+}
+
+#playerinfo2 {
+	position: absolute;
+	left: 93%;
+	top: 76px;
+	border: 1px solid #00A4DB;
+	border-radius: 4px;
+	margin-bottom: 5px;
+	padding: 4px 4px 4px 4px;
+	width: 79px;
+}
+
+#playerinfo3 {
+	position: absolute;
+	left: 3%;
+	top: 190px;
+	border: 1px solid #00A4DB;
+	border-radius: 4px;
+	margin-bottom: 5px;
+	padding: 4px 4px 4px 4px;
+	width: 79px;
+}
+
+#playerinfo4 {
+	position: absolute;
+	left: 93%;
+	top: 190px;
+	border: 1px solid #00A4DB;
+	border-radius: 4px;
+	margin-bottom: 5px;
+	padding: 4px 4px 4px 4px;
+	width: 79px;
+}
+
+#playerinfo5 {
+	position: absolute;
+	left: 3%;
+	top: 304px;
+	border: 1px solid #00A4DB;
+	border-radius: 4px;
+	margin-bottom: 5px;
+	padding: 4px 4px 4px 4px;
+	width: 79px;
+}
+
+#playerinfo6 {
+	position: absolute;
+	left: 93%;
+	top: 304px;
+	border: 1px solid #00A4DB;
+	border-radius: 4px;
+	margin-bottom: 5px;
+	padding: 4px 4px 4px 4px;
+	width: 79px;
+}
+
+table#board, td#bones{
+	border: 1px solid #00A4DB;
+	border-radius: 4px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+body{
+	line-height: normal;
+}
+
+p {
+	margin: 0 0 0px;
+}
+
+.playertoken1 {
+	background: url("../images/token1.gif") no-repeat;
+	height: 50px;
+}
+.playertoken2 {
+	background: url("../images/token2.gif") no-repeat;
+	height: 50px;
+}
+.playertoken3 {
+	background: url("../images/token3.gif") no-repeat;
+	height: 50px;
+}
+.playertoken4 {
+	background: url("../images/token4.gif") no-repeat;
+	height: 50px;
+}
+.playertoken5 {
+	background: url("../images/token5.gif") no-repeat;
+	height: 50px;
+}
+.playertoken6 {
+	background: url("../images/token6.gif") no-repeat;
+	height: 50px;
+}
+
+div#pop-up {
+  display: none;
+  position: absolute;
+  width: 180px;
+  padding: 10px;
+  background: #FFFFFF;
+  color: #000000;
+  border: 1px solid #1a1a1a;
+  font-size: 90%;
+}
+
+.dropdown-menu {
+	position: absolute;
+	top: initial;
+	left: initial;
+	z-index: 1000;
+	display: none;
+	float: left;
+	min-width: 160px;
+	padding: 4px 0;
+	margin: 1px 0 0;
+	list-style: none;
+	background-color: white;
+	border: 1px solid #CCC;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding;
+	background-clip: padding-box;
+}

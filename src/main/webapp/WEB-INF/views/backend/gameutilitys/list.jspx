@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_net_mymonopoly_entity_GameUtility" items="${gameutilitys}" z="VdFTI9mxHrTUH7xCdXDpmiXuXWM=">
+        <table:table data="${gameutilitys}" id="l_net_mymonopoly_entity_GameUtility" path="/backend/gameutilitys" z="user-managed">
+            <table:column id="c_net_mymonopoly_entity_GameUtility_cost" property="cost" z="Tmvju+RdP5zskDRfaWk/a33AUoA="/>
+            <table:column id="c_net_mymonopoly_entity_GameUtility_rentMul1" property="rentMul1" z="Xoa6IAFgzd4vCGoP9QRrs2yUU7g="/>
+            <table:column id="c_net_mymonopoly_entity_GameUtility_rentMul2" property="rentMul2" z="rM9k8ghFXxhWqKtQ9lPJJk13Ue4="/>
+            <table:column id="c_net_mymonopoly_entity_GameUtility_owner" property="owner" z="g41KZX2BgemtU7rSNz07AwO5Xbw="/>
+            <table:column id="c_net_mymonopoly_entity_GameUtility_mortaged" property="mortaged" z="n0/qEn7BbAY5MRufE/kpA1FTnzY="/>
+            <table:column id="c_net_mymonopoly_entity_GameUtility_mortage" property="mortage" z="6y6SVR3keT6MhDdNbHpGx9W0i/4="/>
+        </table:table>
+    </page:list>
+</div>

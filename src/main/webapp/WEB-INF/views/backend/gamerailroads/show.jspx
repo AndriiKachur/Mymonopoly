@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_net_mymonopoly_entity_GameRailroad" object="${gamerailroad}" path="/backend/gamerailroads" z="user-managed">
+        <field:display field="cost" id="s_net_mymonopoly_entity_GameRailroad_cost" object="${gamerailroad}" z="ZYe1+dyuv4PHIqBLV4dTnd2Yrlc="/>
+        <field:display field="rent1" id="s_net_mymonopoly_entity_GameRailroad_rent1" object="${gamerailroad}" z="0mYlQKCQ7mKVkEtM4p6SrLjT/gw="/>
+        <field:display field="rent2" id="s_net_mymonopoly_entity_GameRailroad_rent2" object="${gamerailroad}" z="3rlycW2HrOxxAVI46PU6yjLcqao="/>
+        <field:display field="rent3" id="s_net_mymonopoly_entity_GameRailroad_rent3" object="${gamerailroad}" z="vgdEDtBzcvldZRO7qNLJ9ipuf7A="/>
+        <field:display field="rent4" id="s_net_mymonopoly_entity_GameRailroad_rent4" object="${gamerailroad}" z="K7an/KthqEfIF5uCKYyNDIKHVCo="/>
+        <field:display field="mortage" id="s_net_mymonopoly_entity_GameRailroad_mortage" object="${gamerailroad}" z="A81m8hnLjiPWdaz/QJ5HPzwxtTc="/>
+        <field:display field="theme" id="s_net_mymonopoly_entity_GameRailroad_theme" object="${gamerailroad}" z="tyNB8kQRNmbROqIaddVOs/kRTMs="/>
+        <field:display field="name" id="s_net_mymonopoly_entity_GameRailroad_name" object="${gamerailroad}" z="XyNyTciMabIUDZGIWs+5h1Ltnx4="/>
+        <field:display field="owner" id="s_net_mymonopoly_entity_GameRailroad_owner" object="${gamerailroad}" z="YSLAJM4DSHSHY+0KqRT8qpcU43w="/>
+        <field:display field="mortaged" id="s_net_mymonopoly_entity_GameRailroad_mortaged" object="${gamerailroad}" z="ACjDMif97W0EmMP7QsB3DpdPTpc="/>
+    </page:show>
+</div>

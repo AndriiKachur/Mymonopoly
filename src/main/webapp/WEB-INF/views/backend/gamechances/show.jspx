@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_net_mymonopoly_entity_GameChance" object="${gamechance}" path="/backend/gamechances" z="user-managed">
+        <field:display field="message" id="s_net_mymonopoly_entity_GameChance_message" object="${gamechance}" z="dR8GJeaoDxLy2pjA2AqPT8K6Vf0="/>
+        <field:display field="stopTurn" id="s_net_mymonopoly_entity_GameChance_stopTurn" object="${gamechance}" z="hdioebxr05h/H2iF8C57FlaNg88="/>
+        <field:display field="moneyDiff" id="s_net_mymonopoly_entity_GameChance_moneyDiff" object="${gamechance}" z="m+pqDYzTNFO18iyGibV6r81StH0="/>
+        <field:display field="move" id="s_net_mymonopoly_entity_GameChance_move" object="${gamechance}" z="v5vA3oNDIE0W4Bg04CEVx9UfDzY="/>
+        <field:display field="moveToClass" id="s_net_mymonopoly_entity_GameChance_moveToClass" object="${gamechance}" z="oSC2txnZDREbYgXqSzYIv+Vj0rY="/>
+        <field:display field="theme" id="s_net_mymonopoly_entity_GameChance_theme" object="${gamechance}" z="s4EbT6Sg8LHQS5q42UI+M4QknU4="/>
+    </page:show>
+</div>

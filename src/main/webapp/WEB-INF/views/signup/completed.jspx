@@ -1,0 +1,21 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+	<jsp:output omit-xml-declaration="yes" />
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:directive.page pageEncoding="UTF-8" />
+
+	<jsp:directive.include file="/WEB-INF/views/frontend/top_menu.jspx" /> 
+
+	<div class="container">
+		<div class="hero-unit">
+			<h2>Registration successfully ended.</h2>
+			<p>Thank you! Your registration was successfully completed!</p>
+			<p>You can now sign in and take a part in a game ;)</p>
+		</div>
+
+	</div>
+	
+</jsp:root>

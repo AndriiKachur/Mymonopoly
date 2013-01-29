@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_net_mymonopoly_entity_GameChest" items="${gamechests}" z="GNwk1k+LCpQ09xgsXYoLJGAVQik=">
+        <table:table data="${gamechests}" id="l_net_mymonopoly_entity_GameChest" path="/backend/gamechests" z="user-managed">
+            <table:column id="c_net_mymonopoly_entity_GameChest_message" property="message" z="DxS7OZ2JKajTIAeXC1EU12labyY="/>
+            <table:column id="c_net_mymonopoly_entity_GameChest_moneyDiff" property="moneyDiff" z="NmenMLAokCcFPL/EO3572lv4Uos="/>
+            <table:column id="c_net_mymonopoly_entity_GameChest_theme" property="theme" z="B/ukbnGJVY8q0S02r5OpM+WqNnc="/>
+        </table:table>
+    </page:list>
+</div>

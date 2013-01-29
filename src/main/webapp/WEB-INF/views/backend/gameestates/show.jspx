@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_net_mymonopoly_entity_GameEstate" object="${gameestate}" path="/backend/gameestates" z="user-managed">
+        <field:display field="colour" id="s_net_mymonopoly_entity_GameEstate_colour" object="${gameestate}" z="zZ6W6xxQXDu3qESkCazWYwIrFaM="/>
+        <field:display field="cost" id="s_net_mymonopoly_entity_GameEstate_cost" object="${gameestate}" z="O+shkY8BHMC8NysCmspHYyesmnY="/>
+        <field:display field="rent" id="s_net_mymonopoly_entity_GameEstate_rent" object="${gameestate}" z="zliPuQ0igumRouYJyB2wAy+QLD0="/>
+        <field:display field="house1" id="s_net_mymonopoly_entity_GameEstate_house1" object="${gameestate}" z="Ot2LQygyGhe1qv4+8Q/ApZ1C33s="/>
+        <field:display field="house2" id="s_net_mymonopoly_entity_GameEstate_house2" object="${gameestate}" z="PFRggOZWn690AHbkXittgTBkBQc="/>
+        <field:display field="house3" id="s_net_mymonopoly_entity_GameEstate_house3" object="${gameestate}" z="hrAgz4dpKh7kzYdn5fTb9NmnadU="/>
+        <field:display field="house4" id="s_net_mymonopoly_entity_GameEstate_house4" object="${gameestate}" z="XqKfNv4xAeCwm0QiHdv+jVhGM1c="/>
+        <field:display field="house5" id="s_net_mymonopoly_entity_GameEstate_house5" object="${gameestate}" z="8oDeMdYA5QQpy3es4piu/QwfEEM="/>
+        <field:display field="buildCost" id="s_net_mymonopoly_entity_GameEstate_buildCost" object="${gameestate}" z="UF6fIpI4w4Yk3BJumdVIKm4uMdM="/>
+        <field:display field="mortage" id="s_net_mymonopoly_entity_GameEstate_mortage" object="${gameestate}" z="W2/Zg0AmMaqUOJg9e1IXJXMsTuk="/>
+        <field:display field="theme" id="s_net_mymonopoly_entity_GameEstate_theme" object="${gameestate}" z="dzQBDAzQPhFO+NoEjfsMeGMaKlY="/>
+        <field:display field="name" id="s_net_mymonopoly_entity_GameEstate_name" object="${gameestate}" z="0odpJeoNkcRYE3RAyU+e7Zm6PrI="/>
+        <field:display field="houseCost" id="s_net_mymonopoly_entity_GameEstate_houseCost" object="${gameestate}" z="Kg4cXm2VxW1Avh7/DMh+jgZvwbg="/>
+        <field:display field="upgradeLevel" id="s_net_mymonopoly_entity_GameEstate_upgradeLevel" object="${gameestate}" z="u25enbFn7HRdIIGzuYQmuyxb6YM="/>
+        <field:display field="owner" id="s_net_mymonopoly_entity_GameEstate_owner" object="${gameestate}" z="Iy2ssjf1wNx2QGyg1w6q2P+qbo0="/>
+        <field:display field="mortaged" id="s_net_mymonopoly_entity_GameEstate_mortaged" object="${gameestate}" z="oaTz0PnqXarzrhq4DesC3y30O0s="/>
+    </page:show>
+</div>

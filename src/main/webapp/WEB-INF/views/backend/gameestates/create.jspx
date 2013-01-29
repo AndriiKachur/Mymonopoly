@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_net_mymonopoly_entity_GameEstate" modelAttribute="gameEstate" path="/backend/gameestates" render="${empty dependencies}" z="user-managed">
+        <field:input field="colour" id="c_net_mymonopoly_entity_GameEstate_colour" required="true" z="mzxcWy47+A2gy+FizuNSKuALm1w="/>
+        <field:input field="cost" id="c_net_mymonopoly_entity_GameEstate_cost" min="0" required="true" z="YhEPY8U5tsxskKRqEAi3yhzVxz8="/>
+        <field:input field="rent" id="c_net_mymonopoly_entity_GameEstate_rent" min="0" required="true" z="bwERbZZZcJmZgDgxI5Z/ckflaGM="/>
+        <field:input field="house1" id="c_net_mymonopoly_entity_GameEstate_house1" min="0" required="true" z="9WhVg6j4xyervXzz+HprbAbSies="/>
+        <field:input field="house2" id="c_net_mymonopoly_entity_GameEstate_house2" min="0" required="true" z="dr6tgnZU36LK6IiO5Fx7LJvhgFk="/>
+        <field:input field="house3" id="c_net_mymonopoly_entity_GameEstate_house3" min="0" required="true" z="QmIg2uaZH2lK+farHhvbfcgdQi0="/>
+        <field:input field="house4" id="c_net_mymonopoly_entity_GameEstate_house4" min="0" required="true" z="gS3ELjKJzqMuVZmd771AQMw52p0="/>
+        <field:input field="house5" id="c_net_mymonopoly_entity_GameEstate_house5" min="0" required="true" z="aaVCe+yrtqJnfvwBeAsrCYzwdpU="/>
+        <field:input field="buildCost" id="c_net_mymonopoly_entity_GameEstate_buildCost" min="0" required="true" z="09uXHddVXW4BDPicob8bVr8NO4Q="/>
+        <field:input field="mortage" id="c_net_mymonopoly_entity_GameEstate_mortage" min="0" required="true" z="1e0vBZ/lUXvLpxDn176UBS2t/64="/>
+        <field:select field="theme" id="c_net_mymonopoly_entity_GameEstate_theme" itemValue="id" items="${gamethemes}" path="/backend/gamethemes" z="user-managed"/>
+        <field:input field="name" id="c_net_mymonopoly_entity_GameEstate_name" required="true" z="UMs4rOgbl2fynck1/j/WX5AXPfM="/>
+        <field:input field="houseCost" id="c_net_mymonopoly_entity_GameEstate_houseCost" min="0" required="true" z="5s0ak6zkSburzFSUDZ3K0Cci+EE="/>
+        <field:input field="upgradeLevel" id="c_net_mymonopoly_entity_GameEstate_upgradeLevel" z="OAG50qqWS2Xx64K2UMYBbc6pb2w="/>
+        <field:input field="owner" id="c_net_mymonopoly_entity_GameEstate_owner" z="kbe1j0ndVZqG0hPJhFqy60p0GLw="/>
+        <field:checkbox field="mortaged" id="c_net_mymonopoly_entity_GameEstate_mortaged" z="eQMbUV5cYy4HLiinkiqsa5m8MHw="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_net_mymonopoly_entity_GameEstate" render="${not empty dependencies}" z="vBliOTch2JRuELw9jF3Rp/zkBos="/>
+</div>

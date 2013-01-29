@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_net_mymonopoly_entity_GameChance" items="${gamechances}" z="HrzGU11mabrIxjLZ9w/yjojkmAU=">
+        <table:table data="${gamechances}" id="l_net_mymonopoly_entity_GameChance" path="/backend/gamechances" z="user-managed">
+            <table:column id="c_net_mymonopoly_entity_GameChance_message" property="message" z="i7dUpfGXxpmSURn2bzmbk4Ty5+o="/>
+            <table:column id="c_net_mymonopoly_entity_GameChance_stopTurn" property="stopTurn" z="NyEDaHNNgdJNGWkOdjDqSeYpDgw="/>
+            <table:column id="c_net_mymonopoly_entity_GameChance_moneyDiff" property="moneyDiff" z="D8PS+Xe7jgfQy44iHeqOOXH1cJE="/>
+            <table:column id="c_net_mymonopoly_entity_GameChance_move" property="move" z="0FV81QgyHKut4kCtYe/gUiRDpWk="/>
+            <table:column id="c_net_mymonopoly_entity_GameChance_moveToClass" property="moveToClass" z="iVxorI7yW+N+zcEqdzrrsVGC4LE="/>
+            <table:column id="c_net_mymonopoly_entity_GameChance_theme" property="theme" z="FO69MmeI5rGy3Tj8TV1Ou4nnRy0="/>
+        </table:table>
+    </page:list>
+</div>

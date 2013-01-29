@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+    <definition extends="frontend" name="frontend/index">
+        <put-attribute name="body" value="/WEB-INF/views/frontend/index.jspx"/>
+    </definition>
+    
+    <definition extends="frontend" name="frontend/creategame">
+        <put-attribute name="body" value="/WEB-INF/views/frontend/creategame.jspx"/>
+    </definition>
+    <definition extends="frontend" name="frontend/joingame">
+        <put-attribute name="body" value="/WEB-INF/views/frontend/joingame.jspx"/>
+    </definition>
+    <definition extends="frontend" name="frontend/login">
+        <put-attribute name="body" value="/WEB-INF/views/frontend/login.jspx"/>
+    </definition>
+    
+    <definition extends="frontend" name="frontend/profile">
+        <put-attribute name="body" value="/WEB-INF/views/frontend/profile.jspx"/>
+    </definition>
+
+</tiles-definitions>

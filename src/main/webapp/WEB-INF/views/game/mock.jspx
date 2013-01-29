@@ -1,0 +1,148 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:game="http://mymonopoly.net/game"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0"	>
+	<jsp:output omit-xml-declaration="yes" />
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:directive.page pageEncoding="UTF-8" />
+	
+	<jsp:directive.include file="/WEB-INF/views/frontend/top_menu.jspx" /> 
+		
+	<div id="gameLayout" class="container">
+	<input type="hidden" value="${game.code}" id="gamecode"/>
+	<input type="hidden" value="${currentPlayer}" id="playerId" />
+		<div id="gamePlace">
+			<table id="board" data-overflow="true">
+				<caption style="font-size: small;">
+					<b>Standard (American Edition) Monopoly game board</b>
+				</caption>
+				<tbody>
+					<tr align="center">
+						<td><game:cell players="${game.players}" position="20" cell="${game.board[20]}"/></td>
+						<td><game:cell players="${game.players}" position="21" cell="${game.board[21]}"/></td>
+						<td><game:cell players="${game.players}" position="22" cell="${game.board[22]}"/></td>
+						<td><game:cell players="${game.players}" position="23" cell="${game.board[23]}"/></td>
+						<td><game:cell players="${game.players}" position="24" cell="${game.board[24]}"/></td>
+						<td><game:cell players="${game.players}" position="25" cell="${game.board[25]}"/></td>
+						<td><game:cell players="${game.players}" position="26" cell="${game.board[26]}"/></td>
+						<td><game:cell players="${game.players}" position="27" cell="${game.board[27]}"/></td>
+						<td><game:cell players="${game.players}" position="28" cell="${game.board[28]}"/></td>
+						<td><game:cell players="${game.players}" position="29" cell="${game.board[29]}"/></td>
+						<td><game:cell players="${game.players}" position="30" cell="${game.board[30]}"/></td>
+					</tr>
+					<tr align="center">
+						<td><game:cell players="${game.players}" position="19" cell="${game.board[19]}"/></td>
+						<td id="bones" style="font-size: xx-large;" rowspan="9" colspan="9">
+						
+							<div align="center" class="centerfield">
+								<b>Monopoly</b>
+								<div id="number"><jsp:text/></div>
+								<div id="timeLeft"><jsp:text/></div>
+								<div id="actions"><jsp:text/></div>
+							</div>
+							
+							<div id="chatContainer">
+								<jsp:text />
+							</div>
+							
+						</td>
+						<td><game:cell players="${game.players}" position="31" cell="${game.board[31]}"/></td>
+					</tr>
+					<tr align="center">
+						<td><game:cell players="${game.players}" position="18" cell="${game.board[18]}"/></td>
+						<td><game:cell players="${game.players}" position="32" cell="${game.board[32]}"/></td>
+					</tr>
+					<tr align="center">
+						<td><game:cell players="${game.players}" position="17" cell="${game.board[17]}"/></td>
+						<td><game:cell players="${game.players}" position="33" cell="${game.board[33]}"/></td>
+					</tr>
+					<tr align="center">
+						<td><game:cell players="${game.players}" position="16" cell="${game.board[16]}"/></td>
+						<td><game:cell players="${game.players}" position="34" cell="${game.board[34]}"/></td>
+					</tr>
+					<tr align="center">
+						<td><game:cell players="${game.players}" position="15" cell="${game.board[15]}"/></td>
+						<td><game:cell players="${game.players}" position="35" cell="${game.board[35]}"/></td>
+					</tr>
+					<tr align="center">
+						<td><game:cell players="${game.players}" position="14" cell="${game.board[14]}"/></td>
+						<td><game:cell players="${game.players}" position="36" cell="${game.board[36]}"/></td>
+					</tr>
+					<tr align="center">
+						<td><game:cell players="${game.players}" position="13" cell="${game.board[13]}"/></td>
+						<td><game:cell players="${game.players}" position="37" cell="${game.board[37]}"/></td>
+					</tr>
+					<tr align="center">
+						<td><game:cell players="${game.players}" position="12" cell="${game.board[12]}"/></td>
+						<td><game:cell players="${game.players}" position="38" cell="${game.board[38]}"/></td>
+					</tr>
+					<tr align="center">
+						<td><game:cell players="${game.players}" position="11" cell="${game.board[11]}"/></td>
+						<td><game:cell players="${game.players}" position="39" cell="${game.board[39]}"/></td>
+					</tr>
+					<tr align="center">
+						<td><game:cell players="${game.players}" position="10" cell="${game.board[10]}"/></td>
+						<td><game:cell players="${game.players}" position="9" cell="${game.board[9]}"/></td>
+						<td><game:cell players="${game.players}" position="8" cell="${game.board[8]}"/></td>
+						<td><game:cell players="${game.players}" position="7" cell="${game.board[7]}"/></td>
+						<td><game:cell players="${game.players}" position="6" cell="${game.board[6]}"/></td>
+						<td><game:cell players="${game.players}" position="5" cell="${game.board[5]}"/></td>
+						<td><game:cell players="${game.players}" position="4" cell="${game.board[4]}"/></td>
+						<td><game:cell players="${game.players}" position="3" cell="${game.board[3]}"/></td>
+						<td><game:cell players="${game.players}" position="2" cell="${game.board[2]}"/></td>
+						<td><game:cell players="${game.players}" position="1" cell="${game.board[1]}"/></td>
+						<td><game:cell players="${game.players}" position="0" cell="${game.board[0]}"/></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<c:set var="i" value="1" />
+		<c:forEach var="player" items="${game.players}">
+			<div id="playerinfo${i}">
+				<hidden id="${player.id}" value="${i}" />
+				<p>
+					<span id="player${player.id}">${player.name}</span>
+				</p>
+				<p>
+					<div class="playertoken${i}"><jsp:text /></div>
+				</p>
+				<p>
+					Money:<span id="money${i}">${player.money}</span>
+				</p>
+				<p>
+					Capital:<span id="capital${i}">${player.capital}</span>
+				</p>
+			</div>
+			<c:set var="i" value="${i+1}" />
+		</c:forEach>
+	</div>
+
+	<div id="pop-up">
+      <p>
+	       <jsp:text/>
+      </p>
+    </div>
+	
+	<div style="display: none">
+		<div id="popoverTemplate">
+			<div id="poname"><center><strong>{name}</strong></center></div>
+			<div id="pocost"><p>Cost: {cost}</p></div>
+			<div id="porent"><p>Rent: {rent}</p></div>
+			<div id="poucost"><p>Upgrade cost: {ucost}</p></div>
+			<div id="pourent"><p>Upgrade rent: {urent}</p></div>
+			<div id="pomortage"><p>Mortage: {mortage}</p></div>
+			<div id="poowner"><p>Owner: {owner}</p></div>
+		</div>
+	</div>
+	
+	<ul class="dropdown-menu">
+      <li><a href="#">Action</a></li>
+      <li><a href="#">Another action</a></li>
+      <li><a href="#">Something else here</a></li>
+      <li class="divider"></li>
+      <li><a href="#">Separated link</a></li>
+    </ul>
+</jsp:root>

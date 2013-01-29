@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_net_mymonopoly_entity_GameUtility" object="${gameutility}" path="/backend/gameutilitys" z="user-managed">
+        <field:display field="cost" id="s_net_mymonopoly_entity_GameUtility_cost" object="${gameutility}" z="qjvm5usIPwvzBiTJtXA/UerJ2eA="/>
+        <field:display field="rentMul1" id="s_net_mymonopoly_entity_GameUtility_rentMul1" object="${gameutility}" z="hI+7uKTzNsaYq1h958KrmZ4aiA0="/>
+        <field:display field="rentMul2" id="s_net_mymonopoly_entity_GameUtility_rentMul2" object="${gameutility}" z="gUtMU8TF2PLYw3RGoICaOOQnPik="/>
+        <field:display field="mortage" id="s_net_mymonopoly_entity_GameUtility_mortage" object="${gameutility}" z="TNm11mZM6N6tEiTuUWSsul1AGkQ="/>
+        <field:display field="name" id="s_net_mymonopoly_entity_GameUtility_name" object="${gameutility}" z="E5joRe760dsbDTVY+h3zS5IA1Jw="/>
+        <field:display field="owner" id="s_net_mymonopoly_entity_GameUtility_owner" object="${gameutility}" z="mdw8pGG7D4Ufg4Iievt0i8A2tIc="/>
+        <field:display field="mortaged" id="s_net_mymonopoly_entity_GameUtility_mortaged" object="${gameutility}" z="P4B0yJXqwljHOc9SEZCb2+n07P4="/>
+        <field:display field="theme" id="s_net_mymonopoly_entity_GameUtility_theme" object="${gameutility}" z="Z947HfEmhLiAVEX19dqxFMmhyQ4="/>
+    </page:show>
+</div>

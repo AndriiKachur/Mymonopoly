@@ -1,0 +1,56 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+	<jsp:output omit-xml-declaration="yes" />
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:directive.page pageEncoding="UTF-8" />
+
+	<jsp:directive.include file="/WEB-INF/views/frontend/top_menu.jspx" />
+
+	<div class="container">
+		<!-- Main hero unit for a primary marketing message or call to action -->
+
+		<div class="hero-unit">
+			<h2>Please login</h2>
+			<center>
+			<c:if test="${errors != null }">
+				<div class="alert alert-error">
+					<c:out value="${errors}"/>
+				</div>
+			</c:if>
+				<c:url var="url" value="/login" />
+				<form action="${url}" method="post">
+
+					<div class="control-group">
+						<label class="control-label" for="email">Email:</label>
+						<div class="controls">
+							<input class="input-xlarge focused" id="email" name="n"
+								type="text" placeholder="Your email"/>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label" for="password">Password:</label>
+						<div class="controls">
+							<input class="input-xlarge focused" id="password" name="p"
+								type="password" placeholder="Your password"/>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<label class="checkbox input-small" for="check">Remember me</label>
+						<input type="checkbox" id="check" />					
+					</div>
+					
+					<div class="control-group">
+						<button type="submit" class="btn btn-xlarge">Sign in</button>
+					</div>
+					
+				</form>
+			</center>
+		</div>
+	</div>
+
+</jsp:root>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+        <menu:category id="c_gameestate" z="zAj9OjuBQpfru/l2Wqyh0oq9zBw=">
+            <menu:item id="i_gameestate_new" messageCode="global_menu_new" url="/backend/gameestates?form" z="user-managed"/>
+            <menu:item id="i_gameestate_list" messageCode="global_menu_list" url="/backend/gameestates?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+        </menu:category>
+        <menu:category id="c_gameutility" z="N3/fo4+OXcEnz5ZE87WjClRJqcc=">
+            <menu:item id="i_gameutility_new" messageCode="global_menu_new" url="/backend/gameutilitys?form" z="user-managed"/>
+            <menu:item id="i_gameutility_list" messageCode="global_menu_list" url="/backend/gameutilitys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+        </menu:category>
+        <menu:category id="c_gametheme" z="aazHK0IKx0KW2zwDieyZzClpYoQ=">
+            <menu:item id="i_gametheme_new" messageCode="global_menu_new" url="/backend/gamethemes?form" z="user-managed"/>
+            <menu:item id="i_gametheme_list" messageCode="global_menu_list" url="/backend/gamethemes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+        </menu:category>
+        <menu:category id="c_gamerailroad" z="GKNRVfbGBhgAeVIIu1Yj6VTKJHo=">
+            <menu:item id="i_gamerailroad_new" messageCode="global_menu_new" url="/backend/gamerailroads?form" z="user-managed"/>
+            <menu:item id="i_gamerailroad_list" messageCode="global_menu_list" url="/backend/gamerailroads?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+        </menu:category>
+        <menu:category id="c_gamechance" z="QICVJwTeWJUBtV8DQaAyi27xlgo=">
+            <menu:item id="i_gamechance_new" messageCode="global_menu_new" url="/backend/gamechances?form" z="user-managed"/>
+            <menu:item id="i_gamechance_list" messageCode="global_menu_list" url="/backend/gamechances?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+        </menu:category>
+        <menu:category id="c_gamechest" z="PSMI9DEAiLxqnHx/ljpERONwSog=">
+            <menu:item id="i_gamechest_new" messageCode="global_menu_new" url="/backend/gamechests?form" z="user-managed"/>
+            <menu:item id="i_gamechest_list" messageCode="global_menu_list" url="/backend/gamechests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+        </menu:category>
+        <menu:category id="c_approle" z="Jt5g47NR6sFIwC0UmcTXlkZRr84=">
+            <menu:item id="i_approle_new" messageCode="global_menu_new" url="/backend/approles?form" z="user-managed"/>
+            <menu:item id="i_approle_list" messageCode="global_menu_list" url="/backend/approles?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+        </menu:category>
+        <menu:category id="c_appuserrole" z="KpmmSfn5mTHPq3OV+9nnpJDLGBU=">
+            <menu:item id="i_appuserrole_new" messageCode="global_menu_new" url="/backend/appuserroles?form" z="user-managed"/>
+            <menu:item id="i_appuserrole_list" messageCode="global_menu_list" url="/backend/appuserroles?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+        </menu:category>
+        <menu:category id="c_appuser" z="cRddFjEd+tY/sB3uFILzC627HG4=">
+            <menu:item id="i_appuser_new" messageCode="global_menu_new" url="/backend/appusers?form" z="user-managed"/>
+            <menu:item id="i_appuser_list" messageCode="global_menu_list" url="/backend/appusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+        </menu:category>
+    </menu:menu>
+</div>
