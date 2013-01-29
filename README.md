@@ -3,9 +3,15 @@ Mymonopoly
 
 Mymonopoly - opensource online monopoly game
 
+#Technology stack:
+* Spring Roo
+* JPA2 (Hibernate)
+* Spring (MVC)
+* Maven
 
 
-How to setup:
+
+#How to setup:
 
 1) Create database and apply dump 'infrastructure/database.sql' to it
 
