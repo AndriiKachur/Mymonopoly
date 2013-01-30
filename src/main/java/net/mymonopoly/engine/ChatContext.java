@@ -11,24 +11,30 @@ import java.util.concurrent.ConcurrentSkipListMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
- * Fully focused on chat rooms class. Thread safe.
+ * Fully focused on chat rooms component. Thread safe.
  * 
  * @author Andrey K.
  * 
  */
-public class Chats {
+@Component
+public class ChatContext {
 
-	private static final Log LOG = LogFactory.getLog(Chats.class);
+	private static final Log LOG = LogFactory.getLog(ChatContext.class);
 
 	private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss ");
+	
+	@Autowired
+	private GameContext games;
 
 	private static final String BEGIN_TAG = "<p>";
 	private static final String END_TAG = "</p>";
 	private static final String SYSTEM_NAME = "<b>SYSTEM</b>: ";
 
-	private static final ConcurrentMap<String, ConcurrentNavigableMap<Long, String>> CHATS = new ConcurrentHashMap<String, ConcurrentNavigableMap<Long, String>>();
+	private ConcurrentMap<String, ConcurrentNavigableMap<Long, String>> CHATS = new ConcurrentHashMap<String, ConcurrentNavigableMap<Long, String>>();
 
 	/**
 	 * Post a message to chat.
@@ -41,7 +47,7 @@ public class Chats {
 	 *            - Message. Best arg is: player name + message
 	 * @return true if message was sent
 	 */
-	public static final boolean send(String gameCode, long timeMillis, String message) {
+	public boolean send(String gameCode, long timeMillis, String message) {
 		if (!CHATS.containsKey(gameCode)) {
 			CHATS.put(gameCode, new ConcurrentSkipListMap<Long, String>());
 		}
@@ -60,7 +66,7 @@ public class Chats {
 	 *            - message
 	 * @return true if message sent succesfully
 	 */
-	public static final boolean systemMessage(String gameCode, long timeMillis, String message) {
+	public boolean systemMessage(String gameCode, long timeMillis, String message) {
 		if (!CHATS.containsKey(gameCode)) {
 			CHATS.put(gameCode, new ConcurrentSkipListMap<Long, String>());
 		}
@@ -75,7 +81,7 @@ public class Chats {
 	 * @param timeMillis
 	 * @return HTML with chat records since date
 	 */
-	public static final String get(String gameCode, long timeMillis) {
+	public String get(String gameCode, long timeMillis) {
 		if (!CHATS.containsKey(gameCode)) {
 			return null;
 		}
@@ -91,15 +97,16 @@ public class Chats {
 	}
 
 	/**
-	 * Performs clean up of inactive chats: - if chat of the ended game - if
-	 * chat is not assigned to started and not started games.
+	 * Performs clean up of inactive chats:
+	 * <br/>- if chat of the ended game 
+	 * <br/>- if chat is not assigned to started and not started games.
 	 */
-	public static final void cleanup() {
+	public void cleanup() {
 		int cleaned = 0;
 		Iterator<Entry<String, ConcurrentNavigableMap<Long, String>>> it = CHATS.entrySet().iterator();
 		while (it.hasNext()) {
 			String gameCode = it.next().getKey();
-			if (!Games.GAMES.containsKey(gameCode) && !Games.NOT_STARTED_GAMES.containsKey(gameCode)) {
+			if (!games.getGames().containsKey(gameCode) && !games.getNotStartedGames().containsKey(gameCode)) {
 				it.remove();
 				++cleaned;
 			}
@@ -115,8 +122,8 @@ public class Chats {
 	 * @param gameCode
 	 * @param message
 	 */
-	public static final void writeToChat(String gameCode, String message) {
-		Chats.systemMessage(gameCode, new Date().getTime(), message);
+	public void writeToChat(String gameCode, String message) {
+		systemMessage(gameCode, new Date().getTime(), message);
 	}
 
 }

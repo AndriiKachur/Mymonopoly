@@ -9,8 +9,8 @@ import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
-import net.mymonopoly.engine.Chats;
-import net.mymonopoly.engine.Games;
+import net.mymonopoly.engine.ChatContext;
+import net.mymonopoly.engine.GameContext;
 import net.mymonopoly.engine.GamesFactory;
 import net.mymonopoly.engine.dto.FieldInfo;
 import net.mymonopoly.engine.dto.Game;
@@ -26,6 +26,7 @@ import net.mymonopoly.entity.GameRailroad;
 import net.mymonopoly.entity.GameUtility;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -36,6 +37,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class GameServiceImpl {
+	@Autowired
+	private ChatContext chatContext;
+	@Autowired
+	private GameContext games;
+	@Autowired
+	private GamesFactory gamesFactory;
 
 	/**
 	 * Get STARTED game object.
@@ -47,7 +54,7 @@ public class GameServiceImpl {
 		if (code == null) {
 			return null;
 		}
-		Game game = Games.GAMES.get(code);
+		Game game = games.getGames().get(code);
 		return game;
 	}
 
@@ -61,7 +68,7 @@ public class GameServiceImpl {
 		if (code == null) {
 			return null;
 		}
-		Game game = Games.NOT_STARTED_GAMES.get(code);
+		Game game = games.getNotStartedGames().get(code);
 		return game;
 	}
 
@@ -126,7 +133,7 @@ public class GameServiceImpl {
 			session.removeAttribute(SNM.PLAYER);
 			session.removeAttribute(SNM.CREATOR);
 		}
-		Game game = GamesFactory.getGame(options);
+		Game game = gamesFactory.getGame(options);
 		game.getPlayers().add(player);
 		session.setAttribute(SNM.GAME, game.getCode());
 		session.setAttribute(SNM.PLAYER, player);
@@ -177,7 +184,7 @@ public class GameServiceImpl {
 					}
 				}
 			}
-			Chats.systemMessage(code, new Date().getTime(), player.getName() + " leaves the game");
+			chatContext.systemMessage(code, new Date().getTime(), player.getName() + " leaves the game");
 		}
 		session.removeAttribute(SNM.GAME);
 		session.removeAttribute(SNM.PLAYER);
@@ -213,12 +220,12 @@ public class GameServiceImpl {
 	public boolean startGame(HttpSession session) {
 		String gameCode = (String) session.getAttribute(SNM.GAME);
 		Game game = getNotStartedGame(gameCode);
-		Games.NOT_STARTED_GAMES.remove(gameCode);
+		games.getNotStartedGames().remove(gameCode);
 		game.setStarted(true);
 		int n = new Random().nextInt(game.getPlayers().size());
 		game.setCurrentPlayer(game.getPlayers().get(n));
 		game.setStartTime(new Date());
-		Games.GAMES.put(game.getCode(), game);
+		games.getGames().put(game.getCode(), game);
 		return true;
 	}
 
@@ -226,7 +233,7 @@ public class GameServiceImpl {
 	 * Returns list of not started games.
 	 */
 	public List<Game> getNotStartedGames() {
-		List<Game> result = new ArrayList<Game>(Games.NOT_STARTED_GAMES.values());
+		List<Game> result = new ArrayList<Game>(games.getNotStartedGames().values());
 		return result;
 	}
 
@@ -237,10 +244,10 @@ public class GameServiceImpl {
 	 * @return empty or filled with Players list.
 	 */
 	public List<Player> getGamePlayers(String code) {
-		if (Games.GAMES.containsKey(code)) {
+		if (games.getGames().containsKey(code)) {
 			return getGame(code).getPlayers();
-		} else if (Games.NOT_STARTED_GAMES.containsKey(code)) {
-			return Games.NOT_STARTED_GAMES.get(code).getPlayers();
+		} else if (games.getGames().containsKey(code)) {
+			return games.getNotStartedGames().get(code).getPlayers();
 		}
 		return Collections.emptyList();
 	}
@@ -345,9 +352,9 @@ public class GameServiceImpl {
 			session.removeAttribute(SNM.CREATOR);
 			return false;
 		}
-		Game game = (Game) Games.GAMES.get(code);
+		Game game = (Game) games.getGames().get(code);
 		if (game == null) {
-			game = Games.NOT_STARTED_GAMES.get(code);
+			game = games.getNotStartedGames().get(code);
 		}
 		if (game == null) {
 			return false;
@@ -375,7 +382,7 @@ public class GameServiceImpl {
 		if (code == null || player == null) {
 			return false;
 		}
-		Game game = (Game) Games.GAMES.get(code);
+		Game game = (Game) games.getGames().get(code);
 		if (game != null && game.getCurrentPlayer() != null
 				&& game.getCurrentPlayer().getId() == player.getId()) {
 			return true;
@@ -395,7 +402,7 @@ public class GameServiceImpl {
 			return false;
 		}
 		Player player = (Player) session.getAttribute(SNM.PLAYER);
-		Game game = (Game) Games.GAMES.get(session.getAttribute(SNM.GAME).toString());
+		Game game = (Game) games.getGames().get(session.getAttribute(SNM.GAME).toString());
 		Object field = game.getBoard().get(cell);
 		if (field instanceof GameChance || field instanceof GameChest || player.getPosition() != cell) {
 			return false;
@@ -405,7 +412,7 @@ public class GameServiceImpl {
 				player.setMoney(player.getMoney() - ge.getCost());
 				player.setCapital(player.getCapital() + ge.getCost());
 				ge.setOwner(player);
-				Chats.writeToChat(game.getCode(), player.getName() + " bought " + ge.getName());
+				chatContext.writeToChat(game.getCode(), player.getName() + " bought " + ge.getName());
 				return true;
 			}
 		} else if (field instanceof GameRailroad) {
@@ -414,7 +421,7 @@ public class GameServiceImpl {
 				player.setMoney(player.getMoney() - gr.getCost());
 				player.setCapital(player.getCapital() + gr.getCost());
 				gr.setOwner(player);
-				Chats.writeToChat(game.getCode(), player.getName() + " bought " + gr.getName());
+				chatContext.writeToChat(game.getCode(), player.getName() + " bought " + gr.getName());
 				return true;
 			}
 		} else if (field instanceof GameUtility) {
@@ -423,7 +430,7 @@ public class GameServiceImpl {
 				player.setMoney(player.getMoney() - gu.getCost());
 				player.setCapital(player.getCapital() + gu.getCost());
 				gu.setOwner(player);
-				Chats.writeToChat(game.getCode(), player.getName() + " bought " + gu.getName());
+				chatContext.writeToChat(game.getCode(), player.getName() + " bought " + gu.getName());
 				return true;
 			}
 		}
@@ -443,7 +450,7 @@ public class GameServiceImpl {
 			return false;
 		}
 		Player player = (Player) session.getAttribute(SNM.PLAYER);
-		Game game = (Game) Games.GAMES.get(session.getAttribute(SNM.GAME).toString());
+		Game game = (Game) games.getGames().get(session.getAttribute(SNM.GAME).toString());
 		Object field = game.getBoard().get(cell);
 		if (field instanceof GameChance || field instanceof GameChest) {
 			return false;
@@ -453,7 +460,7 @@ public class GameServiceImpl {
 				player.setMoney(player.getMoney() + ge.getCost());
 				player.setCapital(player.getCapital() - ge.getCost());
 				ge.setOwner(null);
-				Chats.writeToChat(game.getCode(), player.getName() + " sold " + ge.getName());
+				chatContext.writeToChat(game.getCode(), player.getName() + " sold " + ge.getName());
 				return true;
 			}
 		} else if (field instanceof GameRailroad) {
@@ -462,7 +469,7 @@ public class GameServiceImpl {
 				player.setMoney(player.getMoney() + gr.getCost());
 				player.setCapital(player.getCapital() - gr.getCost());
 				gr.setOwner(null);
-				Chats.writeToChat(game.getCode(), player.getName() + " sold " + gr.getName());
+				chatContext.writeToChat(game.getCode(), player.getName() + " sold " + gr.getName());
 				return true;
 			}
 		} else if (field instanceof GameUtility) {
@@ -471,7 +478,7 @@ public class GameServiceImpl {
 				player.setMoney(player.getMoney() + gu.getCost());
 				player.setCapital(player.getCapital() - gu.getCost());
 				gu.setOwner(null);
-				Chats.writeToChat(game.getCode(), player.getName() + " sold " + gu.getName());
+				chatContext.writeToChat(game.getCode(), player.getName() + " sold " + gu.getName());
 				return true;
 			}
 		}
@@ -490,7 +497,7 @@ public class GameServiceImpl {
 			return false;
 		}
 		Player player = (Player) session.getAttribute(SNM.PLAYER);
-		Game game = (Game) Games.GAMES.get(session.getAttribute(SNM.GAME).toString());
+		Game game = (Game) games.getGames().get(session.getAttribute(SNM.GAME).toString());
 		Object field = game.getBoard().get(cell);
 		if (field instanceof GameEstate) {
 			GameEstate ge = (GameEstate) field;
@@ -499,7 +506,7 @@ public class GameServiceImpl {
 				ge.setUpgradeLevel(ge.getUpgradeLevel() + 1);
 				player.setMoney(player.getMoney() - ge.getBuildCost());
 				player.setCapital(player.getCapital() + ge.getBuildCost());
-				Chats.writeToChat(game.getCode(), player.getName() + " upgraded " + ge.getName());
+				chatContext.writeToChat(game.getCode(), player.getName() + " upgraded " + ge.getName());
 				return true;
 			}
 		}
@@ -518,7 +525,7 @@ public class GameServiceImpl {
 			return false;
 		}
 		Player player = (Player) session.getAttribute(SNM.PLAYER);
-		Game game = (Game) Games.GAMES.get(session.getAttribute(SNM.GAME).toString());
+		Game game = (Game) games.getGames().get(session.getAttribute(SNM.GAME).toString());
 		Object field = game.getBoard().get(cell);
 		if (field instanceof GameEstate) {
 			GameEstate ge = (GameEstate) field;
@@ -526,7 +533,7 @@ public class GameServiceImpl {
 				ge.setUpgradeLevel(ge.getUpgradeLevel() - 1);
 				player.setMoney(player.getMoney() + ge.getBuildCost() / 2);
 				player.setCapital(player.getCapital() - ge.getBuildCost());
-				Chats.writeToChat(game.getCode(), player.getName() + " downgraded " + ge.getName());
+				chatContext.writeToChat(game.getCode(), player.getName() + " downgraded " + ge.getName());
 				return true;
 			}
 		}
@@ -545,7 +552,7 @@ public class GameServiceImpl {
 			return false;
 		}
 		Player player = (Player) session.getAttribute(SNM.PLAYER);
-		Game game = (Game) Games.GAMES.get(session.getAttribute(SNM.GAME).toString());
+		Game game = (Game) games.getGames().get(session.getAttribute(SNM.GAME).toString());
 		Object field = game.getBoard().get(cell);
 		if (field instanceof GameEstate) {
 			GameEstate ge = (GameEstate) field;
@@ -554,7 +561,7 @@ public class GameServiceImpl {
 				ge.setMortaged(true);
 				player.setMoney(player.getMoney() + ge.getMortage());
 				player.setCapital(player.getCapital() - ge.getCost());
-				Chats.writeToChat(game.getCode(), player.getName() + " laid the " + ge.getName());
+				chatContext.writeToChat(game.getCode(), player.getName() + " laid the " + ge.getName());
 				return true;
 			}
 		} else if (field instanceof GameRailroad) {
@@ -563,7 +570,7 @@ public class GameServiceImpl {
 				gr.setMortaged(true);
 				player.setMoney(player.getMoney() + gr.getMortage());
 				player.setCapital(player.getCapital() - gr.getCost());
-				Chats.writeToChat(game.getCode(), player.getName() + " laid the " + gr.getName());
+				chatContext.writeToChat(game.getCode(), player.getName() + " laid the " + gr.getName());
 				return true;
 			}
 		} else if (field instanceof GameUtility) {
@@ -572,7 +579,7 @@ public class GameServiceImpl {
 				gu.setMortaged(true);
 				player.setMoney(player.getMoney() + gu.getMortage());
 				player.setCapital(player.getCapital() - gu.getCost());
-				Chats.writeToChat(game.getCode(), player.getName() + " laid the " + gu.getName());
+				chatContext.writeToChat(game.getCode(), player.getName() + " laid the " + gu.getName());
 				return true;
 			}
 		}

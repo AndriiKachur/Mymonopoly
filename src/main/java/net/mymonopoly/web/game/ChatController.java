@@ -4,11 +4,12 @@ import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
-import net.mymonopoly.engine.Chats;
+import net.mymonopoly.engine.ChatContext;
 import net.mymonopoly.engine.dto.Player;
 import net.mymonopoly.engine.utils.JSON;
 import net.mymonopoly.engine.utils.SNM;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/game/chat")
 @Controller
 public class ChatController {
+	@Autowired
+	private ChatContext chatContext;
 
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
@@ -36,7 +39,7 @@ public class ChatController {
 		if (player != null && gameCode != null) {
 
 			message = message.replaceAll("\\<.*?\\>", "");
-			Chats.send(gameCode, new Date().getTime(), player.getName() + ": " + message);
+			chatContext.send(gameCode, new Date().getTime(), player.getName() + ": " + message);
 			return JSON.OK;
 		}
 		return JSON.ERROR;
@@ -55,7 +58,7 @@ public class ChatController {
 			time = new Date().getTime();
 		}
 		session.setAttribute(SNM.LAST_CHAT_GET, new Date().getTime());
-		String messages = Chats.get(gameCode, time);
+		String messages = chatContext.get(gameCode, time);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json; charset=utf-8");

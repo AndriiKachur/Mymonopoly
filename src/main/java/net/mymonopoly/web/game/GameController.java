@@ -32,12 +32,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GameController {
 
 	@Autowired
+	private GamesFactory gamesFactory;
+	@Autowired
 	private GameServiceImpl service;
 
 	@RequestMapping(value = "mock")
 	public String mockPage(Model model, HttpSession session) {
 		// FIXME this is a test page
-		Game game = GamesFactory.getTestGame(new GameOptions());
+		Game game = gamesFactory.getTestGame(new GameOptions());
 		game.getOptions().setGameName("TEST MOCK");
 		Player p = new Player();
 		p.setName("John Coul");

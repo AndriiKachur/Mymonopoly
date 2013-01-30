@@ -1,13 +1,15 @@
 Mymonopoly
 ==========
 
-Mymonopoly - opensource online monopoly game
+Mymonopoly - opensource online monopoly game.
+http://mymonopoly.net (coming soon)
 
 #Technology stack:
 * Spring Roo
 * JPA2 (Hibernate)
-* Spring (MVC)
+* Spring (Core,MVC)
 * Maven
+* Twitter Bootstrap
 
 
 

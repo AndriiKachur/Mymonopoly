@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import net.mymonopoly.engine.dto.Game;
 import net.mymonopoly.engine.dto.GameOptions;
@@ -16,16 +18,17 @@ import net.mymonopoly.entity.GameRailroad;
 import net.mymonopoly.entity.GameUtility;
 
 /**
- * Static game factory class. <br/>
- * Use this class to create game objects.
+ * Game factory component. <br/>
+ * Use this bean to create game objects.
  * 
  * @author Andrey K.
  * 
  */
-public final class GamesFactory {
-
-	private GamesFactory() {
-	}
+@Component
+public class GamesFactory {
+	
+	@Autowired
+	private GameContext games;
 
 	/**
 	 * Create game based on options.
@@ -34,7 +37,7 @@ public final class GamesFactory {
 	 *            - game options
 	 * @return - game object
 	 */
-	public static final Game getGame(GameOptions o) {
+	public Game getGame(GameOptions o) {
 		Game game = new Game();
 		game.setPlayers(new ArrayList<Player>());
 		game.setStarted(false);
@@ -93,8 +96,8 @@ public final class GamesFactory {
 		board.add(GameEstate.findGameEstate(22l));
 
 		game.setBoard(board);
-
-		Games.NOT_STARTED_GAMES.put(game.getCode(), game);
+		
+		games.getNotStartedGames().put(game.getCode(), game);
 		return game;
 	}
 
@@ -105,7 +108,7 @@ public final class GamesFactory {
 	 *            - game options.
 	 * @return game object
 	 */
-	public static final Game getTestGame(GameOptions o) {
+	public Game getTestGame(GameOptions o) {
 		Game game = new Game();
 		game.setPlayers(new ArrayList<Player>());
 		game.setStarted(false);

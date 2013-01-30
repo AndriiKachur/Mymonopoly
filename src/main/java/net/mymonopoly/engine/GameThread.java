@@ -16,6 +16,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -30,6 +31,11 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 
 	private static final Log LOG = LogFactory.getLog(GameThread.class);
 	private Thread thread;
+	
+	@Autowired
+	private ChatContext chatContext;
+	@Autowired
+	private GameContext games;
 
 	public void run() {
 
@@ -39,7 +45,7 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 			long gamesCount = 0;
 			
 			// ONE GAME PROCESS:: START
-			for (Entry<String, Game> entry : Games.GAMES.entrySet()) {
+			for (Entry<String, Game> entry : games.getGames().entrySet()) {
 				Game game = entry.getValue();
 				Player currentPlayer = game.getCurrentPlayer();
 				if (currentPlayer.isLeave()) {
@@ -54,12 +60,12 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 				if (new Date().getTime() - game.getLastMoveTime() > game.getOptions().getTimeLimit()) {
 					if (currentPlayer.isWasMoveSkip()) {
 						currentPlayer.setLeave(true);
-						Chats.systemMessage(game.getCode(), new Date().getTime(), currentPlayer.getName()
+						chatContext.systemMessage(game.getCode(), new Date().getTime(), currentPlayer.getName()
 								+ " leaves the game");
 						giveMoveToNextPlayer(game);
 					} else {
 						currentPlayer.setWasMoveSkip(true);
-						Chats.systemMessage(game.getCode(), new Date().getTime(), currentPlayer.getName()
+						chatContext.systemMessage(game.getCode(), new Date().getTime(), currentPlayer.getName()
 								+ " skipped his turn");
 						giveMoveToNextPlayer(game);
 						continue;
@@ -69,12 +75,12 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 					if (!currentPlayer.isWasMove() && currentPlayer.getMoney() > 0) {
 						movePlayer(game);
 					} else if (currentPlayer.getMoney() < 0 && currentPlayer.getMoveToKick() > 0) {
-						Chats.writeToChat(game.getCode(), "'s balance is negative. Player will be kicked in "
+						chatContext.writeToChat(game.getCode(), "'s balance is negative. Player will be kicked in "
 								+ currentPlayer.getMoveToKick() + " turn.");
 						currentPlayer.setMoveToKick(currentPlayer.getMoveToKick() - 1);
 						currentPlayer.setWasMove(true);
 					} else if (currentPlayer.getMoney() < 0 && currentPlayer.getMoveToKick() <= 0) {
-						Chats.writeToChat(game.getCode(), " is a bankrupt.");
+						chatContext.writeToChat(game.getCode(), " is a bankrupt.");
 						currentPlayer.setLeave(true);
 					}
 					if (currentPlayer.isEndTurn()) {
@@ -86,7 +92,7 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 			}
 			// ONE GAME PROCESS:: END
 			
-			Chats.cleanup();
+			chatContext.cleanup();
 			long endTime = new Date().getTime();
 			if (gamesCount > 0 || removed > 0) {
 				LOG.info("worked: " + (endTime - startTime) + "ms, processed: " + gamesCount
@@ -128,7 +134,7 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 
 	private void endGame(Game game) {
 		createGameStatistics(game);
-		Games.GAMES.remove(game.getCode());
+		games.getGames().remove(game.getCode());
 	}
 
 	private void movePlayer(Game game) {
@@ -138,7 +144,7 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 		while (move <= 1) {
 			move = rand.nextInt(13);
 		}
-		Chats.writeToChat(game.getCode(), " roll dices for " + move);
+		chatContext.writeToChat(game.getCode(), " roll dices for " + move);
 		currentPlayer.setWasMove(true);
 		game.setLastMove(move);
 		int position = move + currentPlayer.getPosition();
@@ -146,7 +152,7 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 			int moneyGet = 200;
 			// Give money to player for ending a circle
 			currentPlayer.setMoney(currentPlayer.getMoney() + moneyGet);
-			Chats.writeToChat(game.getCode(), currentPlayer.getName() + " gets $" + moneyGet + " gold");
+			chatContext.writeToChat(game.getCode(), currentPlayer.getName() + " gets $" + moneyGet + " gold");
 			position -= game.getBoard().size();
 		}
 		currentPlayer.setPosition((byte) position);
@@ -185,7 +191,7 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 					break;
 				}
 				currentPlayer.setMoney(currentPlayer.getMoney() - pay);
-				Chats.writeToChat(game.getCode(), " paid $" + pay + " rent to " + estate.getOwner().getName());
+				chatContext.writeToChat(game.getCode(), " paid $" + pay + " rent to " + estate.getOwner().getName());
 			}
 		}
 	}
@@ -197,7 +203,6 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 	 *            - ended game
 	 */
 	private void createGameStatistics(Game game) {
-		// TODO: write game statistics
 		HistoryGame history = new HistoryGame();
 		history.setCode(game.getCode());
 		history.setEndTime(new Date());
@@ -222,7 +227,7 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 	 */
 	private int removeNotStartedGames() {
 		int removed = 0;
-		Iterator<Entry<String, Game>> i = Games.NOT_STARTED_GAMES.entrySet().iterator();
+		Iterator<Entry<String, Game>> i = games.getNotStartedGames().entrySet().iterator();
 		while (i.hasNext()) {
 			Entry<String, Game> entry = i.next();
 			if (entry.getValue().getPlayers().isEmpty()) {
