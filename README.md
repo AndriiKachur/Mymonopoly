@@ -2,7 +2,7 @@ Mymonopoly
 ==========
 
 Mymonopoly - opensource online monopoly game.
-http://mymonopoly.net (coming soon)
+http://mymonopoly.net
 
 #Technology stack:
 * Spring Roo
