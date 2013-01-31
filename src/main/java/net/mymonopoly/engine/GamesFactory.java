@@ -26,7 +26,7 @@ import net.mymonopoly.entity.GameUtility;
  */
 @Component
 public class GamesFactory {
-	
+
 	@Autowired
 	private GameContext games;
 
@@ -96,7 +96,7 @@ public class GamesFactory {
 		board.add(GameEstate.findGameEstate(22l));
 
 		game.setBoard(board);
-		
+
 		games.getNotStartedGames().put(game.getCode(), game);
 		return game;
 	}

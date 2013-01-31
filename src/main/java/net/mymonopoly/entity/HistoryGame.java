@@ -39,16 +39,14 @@ public class HistoryGame {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<HistoryPlayer> players = new HashSet<HistoryPlayer>();
 
+	@SuppressWarnings("unchecked")
 	public static List<HistoryGame> findByPlayerId(Long id) {
 		if (id == null) {
 			return null;
 		}
-		Query query = HistoryGame
-				.entityManager()
-				.createQuery(
+		Query query = HistoryGame.entityManager().createQuery(
 						"SELECT hg FROM HistoryGame hg JOIN hg.players p WHERE p.playerId = :param"
 								+ " ORDER BY hg.startTime DESC").setParameter("param", id);
-
 		return query.getResultList();
 	}
 }

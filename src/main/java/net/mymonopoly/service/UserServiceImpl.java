@@ -2,14 +2,14 @@ package net.mymonopoly.service;
 
 import java.util.Random;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import net.mymonopoly.entity.AppUser;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,33 +20,39 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service
-public class AppUserService {
+public class UserServiceImpl {
+	private static final Log LOGGER = LogFactory.getLog(UserServiceImpl.class);
 
-	@Value("${email.from}")
-	private String EMAIL_FROM;
-	@Value("${email.apphost}")
-	private String APP_HOST;
-	@Autowired
-	private MailSender mailSender;
 	@Autowired
 	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;
+	@Autowired
+	private MailServiceImpl mailService;
 
 	/**
-	 * Sends email with new password.
+	 * Sends email with a new password.
 	 * 
 	 * @param email
 	 */
 	public void processForgotPassword(String email) {
 		TypedQuery<AppUser> userQuery = AppUser.findAppUsersByEmailEquals(email);
 		if (null != userQuery && userQuery.getMaxResults() > 0) {
-			AppUser user = userQuery.getSingleResult();
+			AppUser user = null;
+			try {
+				user = userQuery.getSingleResult();
+			} catch (NoResultException ignored) {
+			} catch (RuntimeException re) {
+				LOGGER.warn("", re);
+				return;
+			}
 			Random random = new Random(System.currentTimeMillis());
 			String newPassword = "pass" + random.nextLong() + "word";
 			user.setPassword(messageDigestPasswordEncoder.encodePassword(newPassword, null));
-			user.merge();
-			sendMessage(email, "Password Recovery", "Hi " + user.getName()
-					+ ",\n. You had requested for password recovery. Your password is " + newPassword
-					+ ".\n Please change it.");
+			try {
+				user.merge();
+			} catch (RuntimeException re) {
+				LOGGER.warn("", re);
+			}
+			mailService.sendNewPasswordMail(user, newPassword);
 		}
 	}
 
@@ -74,23 +80,12 @@ public class AppUserService {
 		user.setActivationCode(activationCode);
 		user.setEnabled(false);
 		user.setLocked(false);
-		user.persist();
-
-		sendMessage(
-				user.getEmail(),
-				"User Activaton",
-				"Hello " + user.getName() + ",\n. You had registered with us. Please click on this link to "
-						+ "activate your account - <a href=\"" + APP_HOST + "/signup/?activate&email="
-						+ user.getEmail() + "&code=" + activationCode + "\">Activate Link</a>.");
-	}
-
-	private void sendMessage(String mailTo, String subject, String message) {
-		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-		simpleMailMessage.setTo(mailTo);
-		simpleMailMessage.setFrom(EMAIL_FROM);
-		simpleMailMessage.setSubject(subject);
-		simpleMailMessage.setText(message);
-		mailSender.send(simpleMailMessage);
+		try {
+			user.persist();
+		} catch (RuntimeException re) {
+			LOGGER.warn("", re);
+		}
+		mailService.sendRegistrationMail(email, user);
 	}
 
 }

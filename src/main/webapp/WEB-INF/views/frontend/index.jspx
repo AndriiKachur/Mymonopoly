@@ -16,12 +16,10 @@
 			<h1>Monopoly</h1>
 			<img
 				src="http://upload.wikimedia.org/wikipedia/en/f/f9/Monopoly_pack_logo.png"></img>
-			<p>Monopoly is a board game published by Parker Brothers. The
-				game is named after the economic concept of monopoly, the domination
-				of a market by a single entity.</p>
-
-			<br /> <a class="btn btn-primary btn-large"
-				href="http://en.wikipedia.org/wiki/Monopoly_(game)">Learn more >></a>
+			<p>Welcome to the MyMonopoly's online game server!</p>
+			<p>Here you can register and play a monopoly online game with your friends!</p>
+			<br /> <a class="btn btn-primary btn-large" target="_blank"
+				href="http://en.wikipedia.org/wiki/Monopoly_(game)">Learn more about a game >></a>
 
 
 		</div>

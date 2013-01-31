@@ -2,13 +2,14 @@ package net.mymonopoly.web;
 
 import java.util.Date;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import net.mymonopoly.entity.AppUser;
-import net.mymonopoly.service.AppUserService;
+import net.mymonopoly.service.UserServiceImpl;
 import net.mymonopoly.web.dto.UserRegistrationForm;
 
 import org.apache.commons.logging.Log;
@@ -32,7 +33,7 @@ public class SignUpController {
 	private static final Log LOGGER = LogFactory.getLog(SignUpController.class);
 
 	@Autowired
-	AppUserService appUserService;
+	UserServiceImpl userService;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(@Valid UserRegistrationForm userRegistration, BindingResult result, Model model,
@@ -43,8 +44,9 @@ public class SignUpController {
 		try {
 			exists = AppUser.findAppUsersByEmailEquals(userRegistration.getEmailAddress()).getSingleResult() == null ? false
 					: true;
-		} catch (Exception ignored) {
-			LOGGER.warn("ignored", ignored);
+		} catch (NoResultException ignored) {
+		} catch (RuntimeException re) {
+			LOGGER.warn("", re);
 		}
 
 		if (result.hasErrors() || exists) {
@@ -55,9 +57,9 @@ public class SignUpController {
 
 		} else {
 			try {
-				appUserService.processSignup(userRegistration.getEmailAddress(),
-						userRegistration.getNickname(), userRegistration.getFirstName(),
-						userRegistration.getLastName(), userRegistration.getPassword());
+				userService.processSignup(userRegistration.getEmailAddress(), userRegistration.getNickname(),
+						userRegistration.getFirstName(), userRegistration.getLastName(),
+						userRegistration.getPassword());
 			} catch (RuntimeException e) {
 				LOGGER.error("Can't register: ", e);
 				return "signup/error";
@@ -71,15 +73,19 @@ public class SignUpController {
 			@RequestParam(value = "email", required = true) String email, Model model, HttpSession session) {
 
 		TypedQuery<AppUser> query = AppUser.findAppUsersByActivationCodeAndEmail(activationCode, email);
-		AppUser user = query.getSingleResult();
-		if (user != null) {
-			user.setActivationDate(new Date());
-			user.setEnabled(true);
-			user.merge();
-			return "signup/completed";
-		} else {
-			return "signup/error";
+		try {
+			AppUser user = query.getSingleResult();
+			if (user != null) {
+				user.setActivationDate(new Date());
+				user.setEnabled(true);
+				user.merge();
+				return "signup/completed";
+			}
+		} catch (NoResultException ignored) {
+		} catch (RuntimeException re) {
+			LOGGER.warn("", re);
 		}
+		return "signup/error";
 	}
 
 	private void validate(UserRegistrationForm form, Errors errors) {

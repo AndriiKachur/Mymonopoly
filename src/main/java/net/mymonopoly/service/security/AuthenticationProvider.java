@@ -61,10 +61,13 @@ public class AuthenticationProvider extends AbstractUserDetailsAuthenticationPro
 	@Override
 	protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication)
 			throws AuthenticationException {
-
+		String login = (String) authentication.getPrincipal();
+		if (!StringUtils.hasText(login)) {
+			throw new BadCredentialsException("Please provide your login");
+		}
 		String password = (String) authentication.getCredentials();
 		if (!StringUtils.hasText(password)) {
-			throw new BadCredentialsException("Please enter password");
+			throw new BadCredentialsException("Please enter a password");
 		}
 		String encryptedPassword = messageDigestPasswordEncoder.encodePassword(password, null);
 

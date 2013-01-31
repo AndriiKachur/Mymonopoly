@@ -27,7 +27,7 @@
 						<label class="control-label" for="email">Email:</label>
 						<div class="controls">
 							<input class="input-xlarge focused" id="email" name="n"
-								type="text" placeholder="Your email"/>
+								type="text" placeholder="Your email" required="required"/>
 						</div>
 					</div>
 
@@ -35,13 +35,14 @@
 						<label class="control-label" for="password">Password:</label>
 						<div class="controls">
 							<input class="input-xlarge focused" id="password" name="p"
-								type="password" placeholder="Your password"/>
+								type="password" placeholder="Your password" required="required"/>
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="checkbox input-small" for="check">Remember me</label>
-						<input type="checkbox" id="check" />					
+						<label class="checkbox input-small">
+							<input type="checkbox" id="check" />Remember me
+						</label>											
 					</div>
 					
 					<div class="control-group">

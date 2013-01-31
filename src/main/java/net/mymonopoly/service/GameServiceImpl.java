@@ -27,7 +27,7 @@ import net.mymonopoly.entity.GameUtility;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * Game service. Used for all player <--> game interaction.
@@ -35,7 +35,7 @@ import org.springframework.stereotype.Component;
  * @author Andrey K.
  * 
  */
-@Component
+@Service
 public class GameServiceImpl {
 	@Autowired
 	private ChatContext chatContext;

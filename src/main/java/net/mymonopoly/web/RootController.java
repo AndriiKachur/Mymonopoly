@@ -1,11 +1,14 @@
 package net.mymonopoly.web;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 
 import net.mymonopoly.engine.utils.JSON;
 import net.mymonopoly.engine.utils.SNM;
 import net.mymonopoly.entity.AppUser;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/")
 public class RootController {
+	private static final Log LOGGER = LogFactory.getLog(RootController.class);
 
 	@Autowired
 	@Qualifier("authenticationManager")
@@ -49,10 +53,6 @@ public class RootController {
 			@RequestParam(value = "p", required = true) String password, Model model, HttpSession session) {
 
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, password);
-		AppUser details = new AppUser();
-		details.setEmail(email);
-		token.setDetails(details);
-
 		try {
 			Authentication auth = authenticationManager.authenticate(token);
 			SecurityContextHolder.getContext().setAuthentication(auth);
@@ -63,6 +63,7 @@ public class RootController {
 			session.setAttribute(SNM.NICKNAME, user.getNickname());
 			return "redirect:/";
 		} catch (BadCredentialsException e) {
+			LOGGER.debug("", e);
 			model.addAttribute("errors", e.getMessage());
 			return "frontend/login";
 		}

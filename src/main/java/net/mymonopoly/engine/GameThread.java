@@ -31,7 +31,7 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 
 	private static final Log LOG = LogFactory.getLog(GameThread.class);
 	private Thread thread;
-	
+
 	@Autowired
 	private ChatContext chatContext;
 	@Autowired
@@ -43,7 +43,7 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 			long startTime = new Date().getTime();
 			int removed = removeNotStartedGames();
 			long gamesCount = 0;
-			
+
 			// ONE GAME PROCESS:: START
 			for (Entry<String, Game> entry : games.getGames().entrySet()) {
 				Game game = entry.getValue();
@@ -60,13 +60,13 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 				if (new Date().getTime() - game.getLastMoveTime() > game.getOptions().getTimeLimit()) {
 					if (currentPlayer.isWasMoveSkip()) {
 						currentPlayer.setLeave(true);
-						chatContext.systemMessage(game.getCode(), new Date().getTime(), currentPlayer.getName()
-								+ " leaves the game");
+						chatContext.systemMessage(game.getCode(), new Date().getTime(),
+								currentPlayer.getName() + " leaves the game");
 						giveMoveToNextPlayer(game);
 					} else {
 						currentPlayer.setWasMoveSkip(true);
-						chatContext.systemMessage(game.getCode(), new Date().getTime(), currentPlayer.getName()
-								+ " skipped his turn");
+						chatContext.systemMessage(game.getCode(), new Date().getTime(),
+								currentPlayer.getName() + " skipped his turn");
 						giveMoveToNextPlayer(game);
 						continue;
 					}
@@ -75,8 +75,10 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 					if (!currentPlayer.isWasMove() && currentPlayer.getMoney() > 0) {
 						movePlayer(game);
 					} else if (currentPlayer.getMoney() < 0 && currentPlayer.getMoveToKick() > 0) {
-						chatContext.writeToChat(game.getCode(), "'s balance is negative. Player will be kicked in "
-								+ currentPlayer.getMoveToKick() + " turn.");
+						chatContext.writeToChat(
+								game.getCode(),
+								"'s balance is negative. Player will be kicked in "
+										+ currentPlayer.getMoveToKick() + " turn.");
 						currentPlayer.setMoveToKick(currentPlayer.getMoveToKick() - 1);
 						currentPlayer.setWasMove(true);
 					} else if (currentPlayer.getMoney() < 0 && currentPlayer.getMoveToKick() <= 0) {
@@ -91,7 +93,7 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 				++gamesCount;
 			}
 			// ONE GAME PROCESS:: END
-			
+
 			chatContext.cleanup();
 			long endTime = new Date().getTime();
 			if (gamesCount > 0 || removed > 0) {
@@ -191,7 +193,8 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 					break;
 				}
 				currentPlayer.setMoney(currentPlayer.getMoney() - pay);
-				chatContext.writeToChat(game.getCode(), " paid $" + pay + " rent to " + estate.getOwner().getName());
+				chatContext.writeToChat(game.getCode(), " paid $" + pay + " rent to "
+						+ estate.getOwner().getName());
 			}
 		}
 	}
@@ -217,7 +220,11 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 			historyPlayer.setName(p.getName());
 			history.getPlayers().add(historyPlayer);
 		}
-		history.persist();
+		try {
+			history.persist();
+		} catch (RuntimeException re) {
+			LOG.error("Can't save game history", re);
+		}
 	}
 
 	/**
@@ -240,7 +247,7 @@ public final class GameThread implements Runnable, InitializingBean, DisposableB
 
 	@Override
 	public void destroy() throws Exception {
-		LOG.info("Shutting down game thread");
+		LOG.warn("Shutting down game thread");
 		thread.interrupt();
 	}
 

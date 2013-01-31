@@ -52,7 +52,7 @@ div#gamePlace{
 #playerinfo3 {
 	position: absolute;
 	left: 3%;
-	top: 190px;
+	top: 200px;
 	border: 1px solid #00A4DB;
 	border-radius: 4px;
 	margin-bottom: 5px;
@@ -63,7 +63,7 @@ div#gamePlace{
 #playerinfo4 {
 	position: absolute;
 	left: 93%;
-	top: 190px;
+	top: 200px;
 	border: 1px solid #00A4DB;
 	border-radius: 4px;
 	margin-bottom: 5px;
@@ -74,7 +74,7 @@ div#gamePlace{
 #playerinfo5 {
 	position: absolute;
 	left: 3%;
-	top: 304px;
+	top: 324px;
 	border: 1px solid #00A4DB;
 	border-radius: 4px;
 	margin-bottom: 5px;
@@ -85,7 +85,7 @@ div#gamePlace{
 #playerinfo6 {
 	position: absolute;
 	left: 93%;
-	top: 304px;
+	top: 324px;
 	border: 1px solid #00A4DB;
 	border-radius: 4px;
 	margin-bottom: 5px;
