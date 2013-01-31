@@ -1,18 +1,13 @@
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-06-29 01:42:46
 project --topLevelPackage net.mymonopoly --projectName mymonopoly --java 6 --packaging JAR
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-06-29 01:42:48
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-06-29 01:43:02
 jpa setup --database MYSQL --provider HIBERNATE 
 hint
-// [failed] entity jpa --class net.mymonopoly.entity.Test 
-// [failed] entity jpa --class net.mymonopoly.entity.TestEn --testAutomatically 
 entity jpa --class net.mymonopoly.entity.En --testAutomatically 
 web mvc setup
 web mvc all --package net.mymonopoly.web 
 logging setup --level DEBUG 
 security setup
 focus --class ~.entity.GameEstate
-// [failed] field string --fieldName name --notNull 
 field string --fieldName name --notNull 
 field number --fieldName houseCost --type short --min 0
 entity jpa --class ~.entity.GameChest --testAutomatically 
@@ -20,14 +15,10 @@ field string --fieldName message
 field number --fieldName moneyDiff --type short --notNull 
 field number --fieldName moneyDiff --type short
 field reference --fieldName theme --type ~.entity.GameTheme
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-06-29 02:28:41
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-06-30 10:18:16
 web mvc all --package net.mymonopoly.web
 web mvc json all 
 focus --class ~.entity.GameRailroad
 field string --fieldName name
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-06-30 11:52:55
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-06-30 15:00:08
 web mvc json all 
 focus --class ~.entity.GameUtility
 field string --fieldName name
@@ -38,33 +29,9 @@ field string --fieldName name --unique
 finder add --finderName findGameChancesByTheme --class ~.entity.GameChance
 finder list --class ~.entity.GameTheme
 finder add --finderName findGameThemesByNameEquals --class ~.entity.GameTheme
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-01 01:53:35
 focus --class ~.entity.GameEstate 
-// [failed] field number --fieldName level --type int --transient
 field number --fieldName upgradeLevel --type int --transient
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-01 02:59:30
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-01 04:31:40
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-01 21:25:49
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-02 00:38:36
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-02 17:55:02
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-02 18:02:30
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-03 00:58:56
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-03 01:07:29
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-03 12:32:39
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-04 01:58:52
 focus --class ~.entity.GameRailroad
-// [failed] field reference --fieldName owner --type ~.engine.dto.Player --transient 
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-04 03:45:15
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-10 23:19:06
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-11 00:50:33
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-22 21:05:23
-// [failed] entity jpa --class ~.entity.User --testAutomatically 
-// [failed] field string --fieldName name --notNull 
-// [failed] field string --fieldName surname --notNull 
-// [failed] field string --fieldName email --notNull true --sizeMin 3 --unique 
-// [failed] field string --fieldName email --notNull --sizeMin 3 --unique 
-// [failed] entity jpa --class ~.entity.User --testAutomatically 
-// [failed] entity jpa --class ~.entity.User 
 entity jpa --class ~.entity.AppUser --testAutomatically 
 field string --fieldName name --notNull 
 field string --fieldName surname --notNull 
@@ -91,14 +58,8 @@ finder add --finderName findAppUsersByEmailEquals
 focus --class ~.entity.AppUserRole
 finder list 
 finder add --finderName findAppUserRolesByAppuser
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-23 02:22:01
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-24 00:02:18
 focus --class ~.entity.AppUser
 finder list 
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-24 02:46:03
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-25 00:32:28
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-25 02:13:12
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-30 22:44:14
 entity jpa --class ~.entity.GameStatistics
 field string --fieldName name
 field date --fieldName startTime --type java.util.Date
@@ -108,12 +69,6 @@ field number --type int --fieldName playersCount
 addon list 
 field reference --fieldName winner --type ~.entity.AppUser
 field set --fieldName players --type ~.entity.AppUser
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-31 00:10:26
-// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2012-12-26 21:40:28
-hint
-// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2012-12-26 22:54:03
-// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-01-03 21:32:12
-hint
 hint entities
 entity jpa --class ~.entity.AppRole
 web mvc scaffold --class ~.entity.AppRole
@@ -126,11 +81,8 @@ focus --class ~.entity.AppUserRole
 web mvc scaffold --class ~.web.backend.AppUserRoleController
 entity jpa --class ~.entity.AppRole
 web mvc scaffold --class ~.web.backend.AppRoleController
-// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-01-04 00:22:15
-// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-01-04 21:39:39
 entity jpa --class ~.entity.HistoryGame
 field string --fieldName code --notNull
-// [failed] field string --fieldName code --notNull 
 field date --fieldName startTime --type java.util.Date
 field date --fieldName endTime --type java.util.Date
 field string --fieldName name --notNull
@@ -146,8 +98,4 @@ field set --fieldName players --type ~.entity.HistoryPlayer
 focus --class ~.entity.HistoryGame
 finder list 
 finder add --finderName findHistoryGamesByPlayers
-// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-01-05 04:32:04
-// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-01-05 13:34:52
-// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-01-29 22:10:48
 exit
-// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-01-29 22:12:01
