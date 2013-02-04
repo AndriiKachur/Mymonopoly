@@ -2,11 +2,13 @@ var code;
 var playerId;
 var showActions = true;
 var gameEnd = false;
+var homeUrl;
 
 $(document).ready(function() {
 	$('.cell').dropdown();
 	code = $('#gamecode').prop('value');
 	playerId = $('#playerId').prop('value');
+	homeUrl = $('#homeHref').attr('href')
 	getState();
 	$('#player'+playerId).attr('style','background-color: yellow');
 	window.setInterval("getState();", 2000);
@@ -25,7 +27,7 @@ $("#message").keyup(function(event){
 
 	  $('div.cell').hover(function(e) {
 		  $('#pop-up p').html(
-			'<img src="'+$('#homeHref').attr('href')+'images/loading.gif"/>'	  
+			'<img src="'+ homeUrl+'images/loading.gif"/>'	  
 		  );
 		  $.ajax({
 			    type: 'GET',
@@ -129,8 +131,7 @@ function getState() {
 			$('div.cell.playertoken' + playerInList).removeClass('playertoken' + playerInList);
 			$('#c' + data.currentPlayer.position).addClass('playertoken' + playerInList);
 			if (data.currentPlayer.id == playerId && showActions) {
-				$('#actions').html(
-						"<a href='#' onclick='endTurn()'>End Turn</a>");
+				$('#actions').html("<a href='#' onclick='endTurn()'>End Turn</a>");
 			} else {
 				$('#actions').html("");
 			}
